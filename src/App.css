@@ -157,3 +157,73 @@ color: #FFFFFF;
   width: 100%;
   padding-top: 40px;
 }
+
+/* BookingForm css */
+/* Container */
+form {
+  max-width: 50vw;
+  margin: 2rem auto;
+  padding: 2rem;
+  padding-right: 4rem;
+  background-color: #f9f9f9;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  display: grid;
+  gap: 1.5rem;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* Labels */
+label {
+  font-weight: 600;
+  margin-bottom: 0.25rem;
+  display: block;
+  color: #333;
+}
+
+/* Inputs and selects */
+input[type="date"],
+input[type="number"],
+select {
+  width: 100%;
+  padding: 0.5rem 0.75rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 1rem;
+  box-sizing: border-box;
+  transition: border-color 0.3s ease;
+}
+
+input[type="date"]:focus,
+input[type="number"]:focus,
+select:focus {
+  outline: none;
+  border-color: #495E57;
+  box-shadow: 0 0 5px rgba(0,119,204,0.5);
+}
+
+/* Submit button */
+input[type="submit"] {
+  background-color: #F4CE14;
+  color: #495E57;
+  font-weight: 600;
+  padding: 0.75rem;
+  border: none;
+  border-radius: 5px;
+  font-size: 1.1rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+input[type="submit"]:hover {
+  background-color: #495E57;
+  color: #F4CE14;
+}
+
+/* Responsive */
+@media (max-width: 480px) {
+  form {
+    padding: 1rem;
+    max-width: 100%;
+  }
+}

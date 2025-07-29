@@ -14,12 +14,12 @@ const updateTimes = (state, action) => {
   }
 };
 
-const BookingPage = () => {
+const BookingPage = ({ setData }) => {
   const [availableTimes, dispatch] = useReducer(updateTimes, [], initializeTimes);
 
   return (
     <div>
-      <BookingForm availableTimes={availableTimes} dispatch={dispatch} />
+      <BookingForm availableTimes={availableTimes} dispatch={dispatch} setData={setData} />
     </div>
   )
 }

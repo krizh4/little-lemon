@@ -27,7 +27,7 @@ const submitAPI = function(formData) {
     return true;
 };
 
-const BookingForm = ({ availableTimes, dispatch }) => {
+const BookingForm = ({ availableTimes, dispatch, setData }) => {
   const [time, setTime] = useState("");
   const [guests, setGuests] = useState(1);
   const [occasion, setOccasion] = useState("Birthday");
@@ -51,6 +51,9 @@ const BookingForm = ({ availableTimes, dispatch }) => {
 
     if (status) {
       alert("Reservation made successfully!");
+      setData({ ...reservation }); // Save reservation data to parent component
+      // Redirect to confirmation page or update state to show confirmation
+      window.location.href = "/confirmation"; // Redirect to confirmation page
     }
 
     console.log("Reservation details:", reservation, `Status ${status}`);
@@ -59,17 +62,31 @@ const BookingForm = ({ availableTimes, dispatch }) => {
 
   return (
     <div>
-      <form onSubmit={handleSubmit} style={{ display: 'grid', maxWidth: '200px', gap: '20px' }}>
+      <form onSubmit={handleSubmit}>
         <label htmlFor="res-date">Choose date</label>
-        <input type="date" id="res-date" value={date} onChange={(e) => setDate(e.target.value)} />
+        <input 
+          type="date" 
+          id="res-date" 
+          value={date} 
+          onChange={(e) => setDate(e.target.value)} 
+          required
+          min={new Date().toISOString().split("T")[0]} // Prevent past dates
+          max={new Date(new Date().setFullYear(new Date().getFullYear() + 1)).toISOString().split("T")[0]} // Prevent dates more than a year in the future
+        />
+
         <label htmlFor="res-time">Choose time</label>
-        <select id="res-time" value={time} onChange={(e) => setTime(e.target.value)}>
+        <select 
+          id="res-time" 
+          value={time} 
+          required
+          onChange={(e) => setTime(e.target.value)}>
           {availableTimes.map((time) => (
             <option key={time}>{time}</option>
           ))}
         </select>
+
         <label htmlFor="guests">Number of guests</label>
-        <input type="number" placeholder="1" min="1" max="10" id="guests" value={guests} onChange={(e) => setGuests(e.target.value)} />
+        <input type="number" placeholder="1" min="1" max="10" required id="guests" value={guests} onChange={(e) => setGuests(e.target.value)} />
         <label htmlFor="occasion">Occasion</label>
         <select id="occasion" value={occasion} onChange={(e) => setOccasion(e.target.value)}>
           <option>Birthday</option>
